@@ -1,0 +1,140 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: rgb(34, 34, 34);
+  font-family: "Circular Book";
+  margin: 0;
+  font-size: 14px;
+  letter-spacing: normal;
+  line-height: 18px;
+}
+
+.header {
+  height: 80px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 12px;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+  background: white;
+}
+.header_logo {
+  height: 70px;
+  flex: 0 100px;
+}
+.header_logo img {
+  width: 100%;
+  height: auto;
+}
+
+.header_nav {
+  display: flex;
+  justify-content: flex-end;
+}
+.header_add_button {
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-radius: 22px;
+  cursor: pointer;
+  text-decoration: none;
+  color: rgb(34, 34, 34);
+  height: 48px;
+}
+
+.header_add_button img {
+  width: 22px;
+  height: 22px;
+  padding: 4px;
+}
+.header_add_button p {
+  font-size: 18px;
+}
+
+.main {
+  position: relative;
+  padding-top: 80px;
+}
+
+.main_map {
+  width: calc(100% - 840px);
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.main_googleMap {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+}
+.main_content {
+  min-height: calc(100vh - 80px);
+  width: 840px;
+  padding: 60px 24px 0;
+}
+
+#line-up div {
+  border-radius: 10px;
+  border-style: outset;
+  padding: 10px 20px;
+}
+.main_content p {
+  margin-top: 18px;
+  font-size: 16px;
+}
+
+.main_content h1 {
+  margin-top: 18px;
+  font-size: 32px;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 80px;
+  right: 0;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 10px;
+  opacity: 0.8;
+}
+.form-container .cancel {
+  background-color: red;
+}

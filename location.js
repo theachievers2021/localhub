@@ -1,5 +1,8 @@
 let myLocation = navigator.geolocation;
 
+const addLocationButton = document.getElementById("addLocationButton");
+const addLocationForm = document.getElementById("addLocationForm");
+
 myLocation.getCurrentPosition(success, failure);
 function success(position) {
   let myLat = position.coords.latitude;
@@ -70,8 +73,10 @@ async function getId(city, county) {
 
 async function localHubInfo(id) {
   const encodedid = encodeURI(id);
+
   //console.log(encodedid);
   let url = `https://orase.peviitor.ro/api/localhub/get_info/?id=%22${encodedid}%22`;
+  console.log(url);
   const response = await fetch(url, {
     method: "GET",
     headers: {
@@ -79,5 +84,89 @@ async function localHubInfo(id) {
     },
   });
   const resp = await response.json();
-  console.log("Resp:", resp);
+  console.log(resp);
+  let docs = resp.response.docs;
+  let locationName = [];
+  let locationWeb = [];
+  for (let i = 0; i < docs.length; i++) {
+    locationName.push(docs[i]["name"][0]);
+    locationWeb.push(docs[i]["web"][0]);
+  }
+
+  let locationNameAndWeb = {
+    name: locationName,
+    web: locationWeb,
+  };
+  console.log("L AND W:", locationNameAndWeb);
+  console.log("este:", locationNameAndWeb.name.length);
+  const lineUp = document.getElementById("line-up");
+  for (let i = 0; i < locationNameAndWeb.name.length; i++) {
+    //console.log(locationNameAndWeb.name[i]);
+    //console.log(locationNameAndWeb.web[i]);
+
+    const locationCard = document.createElement("div");
+    const locationNameP = document.createElement("p");
+    const locationWebP = document.createElement("p");
+    const contentLocationName = document.createTextNode(
+      locationNameAndWeb.name[i]
+    );
+    const contentLocationWeb = document.createTextNode(
+      locationNameAndWeb.web[i]
+    );
+    locationNameP.appendChild(contentLocationName);
+    locationWebP.appendChild(contentLocationWeb);
+    locationCard.appendChild(locationNameP);
+    locationCard.appendChild(locationWebP);
+    lineUp.appendChild(locationCard);
+  }
 }
+
+function addNewLocation(data) {
+  fetch("https://orase.peviitor.ro/api/localhub/add_info/", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Accept: "*/*",
+      Connection: "keep - alive",
+    },
+    body: JSON.stringify(data),
+    //   id: "fbc9f3a8-8600-4bea-93f2-257e737ec5bb",
+    //   location_id: "Cluj-Napoca, Cluj, judet Cluj",
+    //   name: ["gazul"],
+    //   web: ["https://www.eon.ro/contact"],
+    //   contact: ["0265 200 366"],
+    //   details: "gaz la retea",
+    // }),
+  });
+}
+
+addLocationForm.addEventListener("submit", async function (event) {
+  event.preventDefault();
+
+  const formData = new FormData(this);
+  const nameForm = formData.get("nameForm");
+  const webForm = formData.get("webForm");
+  const contactForm = formData.get("contactForm");
+  const detailsForm = formData.get("detailsForm");
+
+  const id1 = "fbc9f3a8-8600-4bea-93f2-257e737ec5bn";
+  const locationID = "Cluj-Napoca, Cluj, judet Cluj";
+  const data = [
+    {
+      id: id1,
+      location_id: locationID,
+      name: [nameForm],
+      web: [webForm],
+      contact: [contactForm],
+      details: [detailsForm],
+    },
+  ];
+
+  console.log(data);
+
+  await addNewLocation(data);
+
+  // for (var value of formData.values()) {
+  //   console.log(value);
+  // }
+});

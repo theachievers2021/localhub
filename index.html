@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>Local Hub</title>
+    <link rel="stylesheet" href="./style.css" />
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBELu7088a2UQnTlvSw4KZOp2f3yXUengc"></script>
     <style type="text/css">
       #map {
-        width: 400px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
 
   <body>
-    <div id="map"></div>
+    <header class="header">
+      <div class="header_logo">
+        <img src="./logo.png" alt="Logo" />
+      </div>
+      <div class="header_nav">
+        <button class="header_add_button" onclick="openForm()">
+          <img src="./more.png" alt="Add" />Add Services
+        </button>
+      </div>
+    </header>
+
+    <div class="main">
+      <div class="main_content">
+        <h1>Local Places:</h1>
+        <div id="line-up"></div>
+      </div>
+      <div class="main_map">
+        <div class="main_googleMap">
+          <div id="map"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-popup" id="myForm">
+      <form id="addLocationForm" class="form-container">
+        <label for="nameForm">Name:</label>
+        <input type="text" name="nameForm" id="nameForm" />
+
+        <label for="webForm">Web:</label>
+        <input type="text" name="webForm" id="webForm" />
+
+        <label for="contactForm">Contact:</label>
+        <input type="text" name="contactForm" id="contactForm" />
+
+        <label for="detailsForm">Details:</label>
+        <input type="text" name="detailsForm" id="detailsForm" />
+
+        <button type="submit" id="addLocationButton" class="btn">Add</button>
+        <button type="button" class="btn cancel" onclick="closeForm()">
+          Close
+        </button>
+      </form>
+    </div>
   </body>
+
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+    }
+  </script>
   <script src="./location.js"></script>
 </html>
