@@ -4,7 +4,7 @@
 
 body {
   color: white;
-  font-family: "Circular Book";
+  font-family: "Roboto";
   margin: 0;
   font-size: 14px;
   letter-spacing: normal;
@@ -85,6 +85,8 @@ input {
   color: #a8b9ff;
   height: 48px;
   font-size: 14px;
+  font-family: "Roboto";
+  outline: none;
 }
 
 .main {
@@ -108,11 +110,12 @@ input {
   top: 0;
 }
 .main_content {
-  min-height: calc(100vh - 80px);
+  min-height: 100vh;
   width: 540px;
-  padding: 70px 54px 0;
+  padding: 50px 54px;
   background-color: #1f2d6a;
   scroll-behavior: smooth;
+  padding-bottom: 30px;
 }
 
 #line-up div {
@@ -122,7 +125,7 @@ input {
   border-width: 2px;
   padding: 10px 30px;
   background-color: #192455;
-  margin: 28px;
+  margin-top: 28px;
 }
 
 #line-up div:hover {
@@ -137,7 +140,7 @@ input {
 .main_content h1 {
   margin-top: 18px;
   font-size: 32px;
-  padding: 0 30px;
+  color: #a8b9ff;
 }
 
 .form-popup {
@@ -162,6 +165,7 @@ input {
   margin: 5px 0 22px 0;
   border: none;
   background: #f1f1f1;
+  color: #1f2d6a;
 }
 label {
   color: white;
@@ -176,6 +180,7 @@ label {
   width: 100%;
   margin-bottom: 10px;
   opacity: 0.8;
+  outline: none;
 }
 .form-container .cancel {
   background-color: #ad27ef;
@@ -184,4 +189,56 @@ label {
 textarea:focus,
 input:focus {
   outline: none;
+}
+
+.footer-basic {
+  padding: 40px 0;
+  background-color: #192455;
+  color: white;
+  border-top: 1px solid #a8b9ff;
+}
+
+.footer-basic a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.footer-basic a:hover {
+  opacity: 1;
+  color: #ad27ef;
+}
+
+.footer-basic .social {
+  text-align: center;
+  padding-bottom: 25px;
+  color: #a8b9ff;
+}
+
+.footer-basic .social > a {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  border: 1px solid #a8b9ff;
+  margin: 0 8px;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.footer-basic .social > a:hover {
+  opacity: 0.9;
+  color: #ad27ef;
+  border-color: #ad27ef;
+}
+
+.footer-basic .copyright {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 15px;
+  color: #a8b9ff;
+  margin-bottom: 20px;
 }

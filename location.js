@@ -94,7 +94,7 @@ async function localHubInfo(id) {
   let locationWeb = [];
   for (let i = 0; i < docs.length; i++) {
     locationName.push(docs[i]["name"][0]);
-    //locationWeb.push(docs[i]["web"][0]);
+    locationWeb.push(docs[i]["web"][0]);
   }
 
   let locationNameAndWeb = {
@@ -109,25 +109,34 @@ async function localHubInfo(id) {
   numeServiciiLoc.appendChild(numeServicii);
   mainContent.appendChild(numeServiciiLoc);
   const lineUp = document.getElementById("line-up");
+
   for (let i = 0; i < locationNameAndWeb.name.length; i++) {
     //console.log(locationNameAndWeb.name[i]);
-    //console.log(locationNameAndWeb.web[i]);
+    console.log("Aici web e:", locationNameAndWeb.web[i]);
 
     const locationCard = document.createElement("div");
     const locationNameP = document.createElement("p");
     const locationWebP = document.createElement("p");
+    const linkLocationWeb = document.createElement("a");
     const contentLocationName = document.createTextNode(
       locationNameAndWeb.name[i]
     );
 
-    // const contentLocationWeb = document.createTextNode(
-    //   locationNameAndWeb.web[i]
-    // );
-
     locationNameP.appendChild(contentLocationName);
-    //locationWebP.appendChild(contentLocationWeb);
     locationCard.appendChild(locationNameP);
+
+    if (locationNameAndWeb.web[i]) {
+      const contentLocationWeb = document.createTextNode(
+        locationNameAndWeb.web[i]
+      );
+      locationCard.appendChild(linkLocationWeb);
+      //locationWebP.appendChild(contentLocationWeb);
+      locationCard.href = locationNameAndWeb.web[i];
+      console.log("Link:", locationCard.href);
+    }
+    console.log("Link:", locationCard.href);
     locationCard.appendChild(locationWebP);
+
     lineUp.appendChild(locationCard);
   }
 }
