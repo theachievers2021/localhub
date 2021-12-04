@@ -3,6 +3,8 @@ let myLocation = navigator.geolocation;
 const addLocationButton = document.getElementById("addLocationButton");
 const addLocationForm = document.getElementById("addLocationForm");
 
+let idGeneral = "";
+
 myLocation.getCurrentPosition(success, failure);
 function success(position) {
   let myLat = position.coords.latitude;
@@ -13,7 +15,7 @@ function success(position) {
   var coords = new google.maps.LatLng(myLat, myLong);
 
   var mapOptions = {
-    zoom: 11,
+    zoom: 12,
     center: coords,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
   };
@@ -40,10 +42,12 @@ async function getCityName(lat, long) {
     }
   );
   const resp = await response.json();
-  //console.log("Response from GoogleApi", resp);
-  const locationParse = resp.plus_code.compound_code.split(",");
-  const cityParse = locationParse[0].split(" ");
-  const city = cityParse[1];
+
+  const locationParse = resp.results[0].address_components[2].long_name.split(
+    " "
+  );
+
+  const city = locationParse[0];
 
   console.log("Current city:", city);
 
@@ -68,13 +72,13 @@ async function getId(city, county) {
   const resp = await response.json();
   const id = resp.id;
   console.log("ID:", id);
+  idGeneral = id;
   localHubInfo(id);
 }
 
 async function localHubInfo(id) {
   const encodedid = encodeURI(id);
 
-  //console.log(encodedid);
   let url = `https://orase.peviitor.ro/api/localhub/get_info/?id=%22${encodedid}%22`;
   console.log(url);
   const response = await fetch(url, {
@@ -99,6 +103,11 @@ async function localHubInfo(id) {
   };
   console.log("L AND W:", locationNameAndWeb);
   console.log("este:", locationNameAndWeb.name.length);
+  const mainContent = document.getElementById("main_content");
+  const numeServiciiLoc = document.createElement("h1");
+  const numeServicii = document.createTextNode("Servicii Locale:");
+  numeServiciiLoc.appendChild(numeServicii);
+  mainContent.appendChild(numeServiciiLoc);
   const lineUp = document.getElementById("line-up");
   for (let i = 0; i < locationNameAndWeb.name.length; i++) {
     //console.log(locationNameAndWeb.name[i]);
@@ -110,11 +119,13 @@ async function localHubInfo(id) {
     const contentLocationName = document.createTextNode(
       locationNameAndWeb.name[i]
     );
-    const contentLocationWeb = document.createTextNode(
-      locationNameAndWeb.web[i]
-    );
+
+    // const contentLocationWeb = document.createTextNode(
+    //   locationNameAndWeb.web[i]
+    // );
+
     locationNameP.appendChild(contentLocationName);
-    locationWebP.appendChild(contentLocationWeb);
+    //locationWebP.appendChild(contentLocationWeb);
     locationCard.appendChild(locationNameP);
     locationCard.appendChild(locationWebP);
     lineUp.appendChild(locationCard);
@@ -140,6 +151,15 @@ function addNewLocation(data) {
   });
 }
 
+function generateGUID() {
+  return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, (c) =>
+    (
+      c ^
+      (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
+    ).toString(16)
+  );
+}
+
 addLocationForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
@@ -149,12 +169,11 @@ addLocationForm.addEventListener("submit", async function (event) {
   const contactForm = formData.get("contactForm");
   const detailsForm = formData.get("detailsForm");
 
-  const id1 = "fbc9f3a8-8600-4bea-93f2-257e737ec5bn";
-  const locationID = "Cluj-Napoca, Cluj, judet Cluj";
+  const id1 = generateGUID();
   const data = [
     {
       id: id1,
-      location_id: locationID,
+      location_id: idGeneral,
       name: [nameForm],
       web: [webForm],
       contact: [contactForm],

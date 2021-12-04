@@ -4,7 +4,7 @@
     <title>Local Hub</title>
     <link rel="stylesheet" href="./style.css" />
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBELu7088a2UQnTlvSw4KZOp2f3yXUengc"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBELu7088a2UQnTlvSw4KZOp2f3yXUengc&libraries=places"></script>
     <style type="text/css">
       #map {
         width: 100%;
@@ -18,16 +18,25 @@
       <div class="header_logo">
         <img src="./logo.png" alt="Logo" />
       </div>
+
+      <div class="header_search">
+        <input
+          id="searchTextField"
+          type="text"
+          placeholder="Selecteaza orasul..."
+        />
+      </div>
+
       <div class="header_nav">
         <button class="header_add_button" onclick="openForm()">
-          <img src="./more.png" alt="Add" />Add Services
+          Adaugă un serviciu
         </button>
       </div>
     </header>
 
     <div class="main">
       <div class="main_content">
-        <h1>Local Places:</h1>
+        <div id="main_content"></div>
         <div id="line-up"></div>
       </div>
       <div class="main_map">
@@ -68,5 +77,8 @@
       document.getElementById("myForm").style.display = "none";
     }
   </script>
+
   <script src="./location.js"></script>
+
+  <script src="./searchLocation.js"></script>
 </html>
