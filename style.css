@@ -242,3 +242,37 @@ input:focus {
   color: #a8b9ff;
   margin-bottom: 20px;
 }
+
+.main_content_addLocation {
+  min-height: 100vh;
+  width: 100%;
+  padding: 50px 54px;
+  background-color: #1f2d6a;
+  padding-bottom: 30px;
+}
+
+.main_content_addLocation input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+  color: #1f2d6a;
+}
+
+.main_content_addLocation .btn {
+  background-color: #a8b9ff;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 75%;
+  align-items: center;
+  margin-bottom: 10px;
+  opacity: 0.8;
+  outline: none;
+}
+
+.wrapper {
+  text-align: center;
+}
