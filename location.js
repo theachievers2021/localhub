@@ -93,7 +93,11 @@ async function localHubInfo(id) {
   let locationName = [];
   let locationWeb = [];
   for (let i = 0; i < docs.length; i++) {
-    locationName.push(docs[i]["name"][0]);
+    if (docs[i]["name"]) {
+      locationName.push(docs[i]["name"][0]);
+    } else {
+      locationName.push(null);
+    }
     if (docs[i]["web"]) {
       locationWeb.push(docs[i]["web"][0]);
     } else {
