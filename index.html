@@ -36,6 +36,7 @@
       </div>
 
       <div class="header_nav">
+        <a href="./addLocation.html"><p class="header_add_button">Add</p></a>
         <button class="header_add_button" onclick="openForm()">
           Adaugă un serviciu
         </button>
@@ -56,19 +57,25 @@
 
     <div class="form-popup" id="myForm">
       <form id="addLocationForm" class="form-container">
-        <label for="nameForm">Name:</label>
+        <label for="nameForm">Nume:</label>
         <input type="text" name="nameForm" id="nameForm" />
 
-        <label for="webForm">Web:</label>
+        <label for="webForm">Website:</label>
         <input type="text" name="webForm" id="webForm" />
+
+        <label for="contactForm">Social:</label>
+        <input type="text" name="socialForm" id="contactForm" />
 
         <label for="contactForm">Contact:</label>
         <input type="text" name="contactForm" id="contactForm" />
 
-        <label for="detailsForm">Details:</label>
+        <label for="detailsForm">Detalii:</label>
         <input type="text" name="detailsForm" id="detailsForm" />
 
-        <button type="submit" id="addLocationButton" class="btn">Add</button>
+        <label for="detailsForm">Coordonate GPS:</label>
+        <input type="text" name="gpsForm" id="detailsForm" />
+
+        <button type="submit" id="addLocationButton" class="btn">Adaugă</button>
         <button type="button" class="btn cancel" onclick="closeForm()">
           Close
         </button>
@@ -87,19 +94,19 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     </div>
+
+    <script>
+      function openForm() {
+        document.getElementById("myForm").style.display = "block";
+      }
+
+      function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+      }
+    </script>
+
+    <script src="./location.js"></script>
+
+    <script src="./searchLocation.js"></script>
   </body>
-
-  <script>
-    function openForm() {
-      document.getElementById("myForm").style.display = "block";
-    }
-
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    }
-  </script>
-
-  <script src="./location.js"></script>
-
-  <script src="./searchLocation.js"></script>
 </html>

@@ -48,12 +48,13 @@ async function getCityName(lat, long) {
   );
 
   const city = locationParse[0];
-
   console.log("Current city:", city);
 
   const countyParse = resp.results[0].address_components[4].long_name.split(
     " "
   );
+  console.log(resp.results[0].address_components);
+  console.log("CountyParse:", countyParse);
   const county = countyParse[1];
   console.log("Current county:", county);
   getId(city, county);
@@ -88,21 +89,24 @@ async function localHubInfo(id) {
     },
   });
   const resp = await response.json();
-  console.log(resp);
   let docs = resp.response.docs;
   let locationName = [];
   let locationWeb = [];
   for (let i = 0; i < docs.length; i++) {
     locationName.push(docs[i]["name"][0]);
-    locationWeb.push(docs[i]["web"][0]);
+    if (docs[i]["web"]) {
+      locationWeb.push(docs[i]["web"][0]);
+    } else {
+      locationWeb.push(null);
+    }
   }
 
   let locationNameAndWeb = {
     name: locationName,
     web: locationWeb,
   };
-  console.log("L AND W:", locationNameAndWeb);
-  console.log("este:", locationNameAndWeb.name.length);
+  console.log("Name and Web:", locationNameAndWeb);
+  console.log("Lungime lista este:", locationNameAndWeb.name.length);
   const mainContent = document.getElementById("main_content");
   const numeServiciiLoc = document.createElement("h1");
   const numeServicii = document.createTextNode("Servicii Locale:");
@@ -112,7 +116,7 @@ async function localHubInfo(id) {
 
   for (let i = 0; i < locationNameAndWeb.name.length; i++) {
     //console.log(locationNameAndWeb.name[i]);
-    console.log("Aici web e:", locationNameAndWeb.web[i]);
+    //console.log("Aici web e:", locationNameAndWeb.web[i]);
 
     const locationCard = document.createElement("div");
     const locationNameP = document.createElement("p");
@@ -132,9 +136,8 @@ async function localHubInfo(id) {
       locationCard.appendChild(linkLocationWeb);
       //locationWebP.appendChild(contentLocationWeb);
       locationCard.href = locationNameAndWeb.web[i];
-      console.log("Link:", locationCard.href);
+      //console.log("Link:", locationCard.href);
     }
-    console.log("Link:", locationCard.href);
     locationCard.appendChild(locationWebP);
 
     lineUp.appendChild(locationCard);
@@ -177,6 +180,8 @@ addLocationForm.addEventListener("submit", async function (event) {
   const webForm = formData.get("webForm");
   const contactForm = formData.get("contactForm");
   const detailsForm = formData.get("detailsForm");
+  const socialForm = formData.get("socialForm");
+  const gpsForm = formData.get("gpsForm");
 
   const id1 = generateGUID();
   const data = [
@@ -185,8 +190,10 @@ addLocationForm.addEventListener("submit", async function (event) {
       location_id: idGeneral,
       name: [nameForm],
       web: [webForm],
+      social: [socialForm],
       contact: [contactForm],
       details: [detailsForm],
+      gpsForm: [gpsForm],
     },
   ];
 
