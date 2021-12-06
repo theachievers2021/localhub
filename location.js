@@ -113,7 +113,7 @@ async function localHubInfo(id) {
   console.log("Lungime lista este:", locationNameAndWeb.name.length);
   const mainContent = document.getElementById("main_content");
   const numeServiciiLoc = document.createElement("h1");
-  const numeServicii = document.createTextNode("Servicii Locale:");
+  const numeServicii = document.createTextNode(idGeneral);
   numeServiciiLoc.appendChild(numeServicii);
   mainContent.appendChild(numeServiciiLoc);
   const lineUp = document.getElementById("line-up");
