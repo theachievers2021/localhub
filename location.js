@@ -15,7 +15,7 @@ function success(position) {
   var coords = new google.maps.LatLng(myLat, myLong);
 
   var mapOptions = {
-    zoom: 12,
+    zoom: 14,
     center: coords,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
   };
@@ -92,6 +92,7 @@ async function localHubInfo(id) {
   let docs = resp.response.docs;
   let locationName = [];
   let locationWeb = [];
+  let locationId = [];
   for (let i = 0; i < docs.length; i++) {
     if (docs[i]["name"]) {
       locationName.push(docs[i]["name"][0]);
@@ -103,14 +104,20 @@ async function localHubInfo(id) {
     } else {
       locationWeb.push(null);
     }
+    if (docs[i]["id"]) {
+      locationId.push(docs[i]["id"]);
+    } else {
+      locationId.push(null);
+    }
   }
 
-  let locationNameAndWeb = {
+  let locationNameWebId = {
     name: locationName,
     web: locationWeb,
+    id: locationId,
   };
-  console.log("Name and Web:", locationNameAndWeb);
-  console.log("Lungime lista este:", locationNameAndWeb.name.length);
+  console.log("Name and Web:", locationNameWebId);
+  console.log("Lungime lista este:", locationNameWebId.name.length);
   const mainContent = document.getElementById("main_content");
   const numeServiciiLoc = document.createElement("h1");
   const numeServicii = document.createTextNode(idGeneral);
@@ -118,7 +125,7 @@ async function localHubInfo(id) {
   mainContent.appendChild(numeServiciiLoc);
   const lineUp = document.getElementById("line-up");
 
-  for (let i = 0; i < locationNameAndWeb.name.length; i++) {
+  for (let i = 0; i < locationNameWebId.name.length; i++) {
     //console.log(locationNameAndWeb.name[i]);
     //console.log("Aici web e:", locationNameAndWeb.web[i]);
 
@@ -126,26 +133,56 @@ async function localHubInfo(id) {
     const locationNameP = document.createElement("p");
     const locationWebP = document.createElement("p");
     const linkLocationWeb = document.createElement("a");
+    const deleleteButton = document.createElement("button");
+    deleleteButton.type = "button";
+    deleleteButton.innerHTML = `<i class="ion-android-delete"></i>`;
+    deleleteButton.className = "deleteBtn-styled large_icon";
+    //deleleteButton.onclick = deleteLocation(locationNameWebId.id[i]);
+    deleleteButton.addEventListener("click", async function (event) {
+      event.preventDefault();
+      console.log("SUNT APASAT CU CODUL", locationNameWebId.id[i]);
+      deleteLocation(locationNameWebId.id[i]);
+    });
+
+    console.log(i, locationNameWebId.id[i]);
     const contentLocationName = document.createTextNode(
-      locationNameAndWeb.name[i]
+      locationNameWebId.name[i]
     );
 
     locationNameP.appendChild(contentLocationName);
     locationCard.appendChild(locationNameP);
+    // const deleleteButton = createDeleteButton(locationNameWebId.id[i]);
+    // deleleteButton.onclick = console.log(
+    //   "SUNT APASAT CU CODUL",
+    //   locationNameWebId.id[i]
+    // );
 
-    if (locationNameAndWeb.web[i]) {
+    locationCard.appendChild(deleleteButton);
+
+    if (locationNameWebId.web[i]) {
       const contentLocationWeb = document.createTextNode(
-        locationNameAndWeb.web[i]
+        locationNameWebId.web[i]
       );
       locationCard.appendChild(linkLocationWeb);
       //locationWebP.appendChild(contentLocationWeb);
-      locationCard.href = locationNameAndWeb.web[i];
+      locationCard.href = locationNameWebId.web[i];
       //console.log("Link:", locationCard.href);
     }
     locationCard.appendChild(locationWebP);
 
     lineUp.appendChild(locationCard);
   }
+}
+
+async function deleteLocation(id) {
+  await fetch(`https://orase.peviitor.ro/api/localhub/delete/?id=${id}`, {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Accept: "*/*",
+      Connection: "keep - alive",
+    },
+  });
 }
 
 function addNewLocation(data) {
@@ -176,6 +213,10 @@ function generateGUID() {
   );
 }
 
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
 addLocationForm.addEventListener("submit", async function (event) {
   event.preventDefault();
 
@@ -204,6 +245,7 @@ addLocationForm.addEventListener("submit", async function (event) {
   console.log(data);
 
   await addNewLocation(data);
+  closeForm();
 
   // for (var value of formData.values()) {
   //   console.log(value);

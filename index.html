@@ -3,6 +3,7 @@
   <head>
     <title>Local Hub</title>
     <link rel="stylesheet" href="./style.css" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
@@ -13,12 +14,7 @@
     />
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBELu7088a2UQnTlvSw4KZOp2f3yXUengc&libraries=places"></script>
-    <style type="text/css">
-      #map {
-        width: 100%;
-        height: 100%;
-      }
-    </style>
+    <style type="text/css"></style>
   </head>
 
   <body>
@@ -29,18 +25,16 @@
 
       <div class="header_search">
         <input
-          id="searchTextField"
+          id="searchTextFieldLocatie"
           type="text"
-          placeholder="Selecteaza orasul..."
+          placeholder="Selecteaza locatia..."
         />
+        <button id="searchButtonLocatie" onclick="getLocation()">Cauta</button>
       </div>
 
       <div class="header_nav">
-        <a href="./addLocation/index.html"
-          ><p class="header_add_button">Add</p></a
-        >
-        <button class="header_add_button" onclick="openForm()">
-          Adaugă un serviciu
+        <button class="addButtonIcon large_icon" onclick="openForm()">
+          <i class="ion-android-add"></i>
         </button>
       </div>
     </header>
