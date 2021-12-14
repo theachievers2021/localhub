@@ -41,7 +41,6 @@ body {
 .header_search {
   display: inline-flex;
   border-radius: 10px;
-  overflow: hidden;
   align-items: center;
   border: 1px solid #a8b9ff;
   transition: box-shadow 0.2s ease;
@@ -57,8 +56,6 @@ input {
   background: transparent;
   height: 48px;
   padding: 0 16px;
-  display: flex;
-  align-items: center;
   border: none;
   cursor: pointer;
   font-size: 14px;
@@ -162,8 +159,7 @@ input {
 }
 
 .form-container {
-  max-width: 300px;
-  width: 280px;
+  width: 300px;
   padding: 10px;
   background-color: #1f2d6a;
 }
@@ -332,6 +328,10 @@ input:focus {
     display: inline-block;
     text-align: center;
   }
+  .form-container .btn {
+    width: 75%;
+    align-items: center;
+  }
 
   .header_search {
     height: 40px;
@@ -347,7 +347,7 @@ input:focus {
   }
 
   .addButtonIcon {
-    padding: 0 20px 0 30px;
+    padding: 0 5px 0 15px;
   }
   .large_icon {
     font-size: 32px;
@@ -359,6 +359,15 @@ input:focus {
 
   .header {
     align-items: center;
+  }
+
+  .form-container {
+    width: 100%;
+    padding: 20px;
+    background-color: #1f2d6a;
+  }
+  .form-popup {
+    width: 100%;
   }
 }
 

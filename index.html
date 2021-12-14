@@ -27,9 +27,9 @@
         <input
           id="searchTextFieldLocatie"
           type="text"
-          placeholder="Selecteaza locatia..."
+          placeholder="Localitate..."
         />
-        <button id="searchButtonLocatie" onclick="getLocation()">Cauta</button>
+        <button id="searchButtonLocatie" onclick="getLocation()">Caută</button>
       </div>
 
       <div class="header_nav">
@@ -53,28 +53,25 @@
 
     <div class="form-popup" id="myForm">
       <form id="addLocationForm" class="form-container">
+        <h4 style="text-align: center; color: white">Adaugă un serviciu:</h4>
         <label for="nameForm">Nume:</label>
         <input type="text" name="nameForm" id="nameForm" />
 
         <label for="webForm">Website:</label>
         <input type="text" name="webForm" id="webForm" />
 
-        <label for="contactForm">Social:</label>
-        <input type="text" name="socialForm" id="contactForm" />
-
         <label for="contactForm">Contact:</label>
         <input type="text" name="contactForm" id="contactForm" />
-
         <label for="detailsForm">Detalii:</label>
         <input type="text" name="detailsForm" id="detailsForm" />
-
-        <label for="detailsForm">Coordonate GPS:</label>
-        <input type="text" name="gpsForm" id="detailsForm" />
-
-        <button type="submit" id="addLocationButton" class="btn">Adaugă</button>
-        <button type="button" class="btn cancel" onclick="closeForm()">
-          Close
-        </button>
+        <div class="wrapper">
+          <button type="submit" id="addLocationButton" class="btn">
+            Adaugă
+          </button>
+          <button type="button" class="btn cancel" onclick="closeForm()">
+            Close
+          </button>
+        </div>
       </form>
     </div>
 
