@@ -39,7 +39,7 @@ async function getCityName(lat, long) {
     },
   });
   const resp = await response.json();
-  console.log(url);
+  console.log("URL-UL este:", url);
 
   const locationParse = resp.results[0].address_components[2].long_name.split(
     " "
@@ -58,7 +58,7 @@ async function getCityName(lat, long) {
   // console.log("Mere:", countrySperCaMerge[1]);
 
   console.log("Resp:", resp);
-  //console.log(resp.results[0].address_components);
+  console.log(resp.results[0].address_components);
   console.log("CountyParse:", countyParse);
   const county = countyParse[1];
   console.log("Current county:", county);
