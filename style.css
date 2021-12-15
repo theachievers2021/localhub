@@ -1,6 +1,9 @@
 * {
   box-sizing: border-box;
 }
+html {
+  overscroll-behavior: none;
+}
 
 body {
   color: white;
@@ -365,11 +368,12 @@ input:focus {
     width: 100%;
     padding: 20px;
     background-color: #1f2d6a;
+    overscroll-behavior: auto;
   }
   .form-popup {
     width: 100%;
     overflow: auto;
-    position: fixed;
+    overscroll-behavior-y: contain;
   }
 }
 

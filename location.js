@@ -31,17 +31,15 @@ function failure() {}
 
 async function getCityName(lat, long) {
   const apiKey = "AIzaSyBELu7088a2UQnTlvSw4KZOp2f3yXUengc";
-
-  const response = await fetch(
-    `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`,
-    {
-      method: "GET",
-      headers: {
-        Accept: "*/*",
-      },
-    }
-  );
+  let url = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${long}&key=${apiKey}`;
+  const response = await fetch(url, {
+    method: "GET",
+    headers: {
+      Accept: "*/*",
+    },
+  });
   const resp = await response.json();
+  console.log(url);
 
   const locationParse = resp.results[0].address_components[2].long_name.split(
     " "
@@ -50,10 +48,17 @@ async function getCityName(lat, long) {
   const city = locationParse[0];
   console.log("Current city:", city);
 
-  const countyParse = resp.results[0].address_components[4].long_name.split(
+  // const countyParse = resp.results[0].address_components[4].long_name.split(
+  //   " "
+  // );
+
+  const countyParse = resp.results[7].address_components[0].long_name.split(
     " "
   );
-  console.log(resp.results[0].address_components);
+  // console.log("Mere:", countrySperCaMerge[1]);
+
+  console.log("Resp:", resp);
+  //console.log(resp.results[0].address_components);
   console.log("CountyParse:", countyParse);
   const county = countyParse[1];
   console.log("Current county:", county);
