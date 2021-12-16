@@ -48,6 +48,22 @@ body {
   border: 1px solid #a8b9ff;
   transition: box-shadow 0.2s ease;
   outline: none;
+  justify-content: center;
+}
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}
+.header_search_descopera {
+  display: inline-flex;
+
+  align-items: center;
+  transition: box-shadow 0.2s ease;
+  outline: none;
+  justify-content: center;
+  text-align: center;
 }
 
 .header_search:hover {
@@ -74,6 +90,7 @@ input {
   color: white;
   outline: none;
   display: block;
+  text-align: center;
 }
 
 ::placeholder {
