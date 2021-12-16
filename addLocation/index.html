@@ -12,20 +12,21 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
     />
-
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBELu7088a2UQnTlvSw4KZOp2f3yXUengc"></script>
+    <style type="text/css"></style>
     <title>Adauga Locatie</title>
   </head>
 
   <body>
     <header class="header">
       <div class="header_logo">
-        <a href="./index.html">
+        <a href="../index.html">
           <img src="./../logo.png" alt="Logo" />
         </a>
       </div>
     </header>
     <div class="main">
-      <form class="main_content_addLocation">
+      <form class="main_content_addLocation" id="addLocationFormFromTelefon">
         <h4 style="text-align: center; color: white">Adaugă un serviciu:</h4>
         <label for="nameForm">Name:</label>
         <input type="text" name="nameForm" id="nameForm" />
@@ -39,7 +40,7 @@
         <label for="detailsForm">Details:</label>
         <input type="text" name="detailsForm" id="detailsForm" />
         <div class="wrapper">
-          <button type="submit" id="addLocationButton" class="btn">
+          <button type="submit" id="addLocationButtonSeparateFile" class="btn">
             Adaugă
           </button>
         </div>
@@ -58,6 +59,6 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     </div>
-    <script src="./location.js"></script>
+    <script src="../location.js"></script>
   </body>
 </html>

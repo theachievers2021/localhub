@@ -2,6 +2,12 @@ let myLocation = navigator.geolocation;
 
 const addLocationButton = document.getElementById("addLocationButton");
 const addLocationForm = document.getElementById("addLocationForm");
+const addLocationFormFromTelefon = document.getElementById(
+  "addLocationFormFromTelefon"
+);
+const adaugaLocatieTelefon = document.getElementById(
+  "addLocationButtonSeparateFile"
+);
 
 let idGeneral = "";
 
@@ -191,6 +197,7 @@ async function deleteLocation(id) {
 }
 
 function addNewLocation(data) {
+  console.log("hello from addnew");
   fetch("https://orase.peviitor.ro/api/localhub/add_info/", {
     method: "POST",
     headers: {
@@ -222,37 +229,70 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 
-addLocationForm.addEventListener("submit", async function (event) {
-  event.preventDefault();
+if (addLocationForm) {
+  addLocationForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
 
-  const formData = new FormData(this);
-  const nameForm = formData.get("nameForm");
-  const webForm = formData.get("webForm");
-  const contactForm = formData.get("contactForm");
-  const detailsForm = formData.get("detailsForm");
-  const socialForm = formData.get("socialForm");
-  const gpsForm = formData.get("gpsForm");
+    const formData = new FormData(this);
+    const nameForm = formData.get("nameForm");
+    const webForm = formData.get("webForm");
+    const contactForm = formData.get("contactForm");
+    const detailsForm = formData.get("detailsForm");
+    const socialForm = formData.get("socialForm");
+    const gpsForm = formData.get("gpsForm");
 
-  const id1 = generateGUID();
-  const data = [
-    {
-      id: id1,
-      location_id: idGeneral,
-      name: [nameForm],
-      web: [webForm],
-      social: [socialForm],
-      contact: [contactForm],
-      details: [detailsForm],
-      gpsForm: [gpsForm],
-    },
-  ];
+    const id1 = generateGUID();
+    const data = [
+      {
+        id: id1,
+        location_id: idGeneral,
+        name: [nameForm],
+        web: [webForm],
+        social: [socialForm],
+        contact: [contactForm],
+        details: [detailsForm],
+        gpsForm: [gpsForm],
+      },
+    ];
 
-  console.log(data);
+    console.log(data);
 
-  await addNewLocation(data);
-  closeForm();
+    await addNewLocation(data);
+    closeForm();
 
-  // for (var value of formData.values()) {
-  //   console.log(value);
-  // }
-});
+    // for (var value of formData.values()) {
+    //   console.log(value);
+    // }
+  });
+}
+
+if (addLocationFormFromTelefon) {
+  addLocationFormFromTelefon.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    const formData = new FormData(this);
+    const nameForm = formData.get("nameForm");
+    const webForm = formData.get("webForm");
+    const contactForm = formData.get("contactForm");
+    const detailsForm = formData.get("detailsForm");
+    const socialForm = formData.get("socialForm");
+    const gpsForm = formData.get("gpsForm");
+
+    const id1 = generateGUID();
+    const data = [
+      {
+        id: id1,
+        location_id: idGeneral,
+        name: [nameForm],
+        web: [webForm],
+        social: [socialForm],
+        contact: [contactForm],
+        details: [detailsForm],
+        gpsForm: [gpsForm],
+      },
+    ];
+
+    console.log(data);
+
+    addNewLocation(data);
+  });
+}

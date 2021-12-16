@@ -1,6 +1,7 @@
 //const input = document.getElementById("searchTextField");
 const inputLocatie = document.getElementById("searchTextFieldLocatie");
 const buttonLocatie = document.getElementById("searchButtonLocatie");
+let locatieCautata = "";
 
 // function initialize() {
 //   var options = {
@@ -27,6 +28,7 @@ function capitalizeFirstLetter(string) {
 async function getLocation() {
   console.log("INPUT ESTE", capitalizeFirstLetter(inputLocatie.value));
   const searchedLocation = capitalizeFirstLetter(inputLocatie.value);
+  locatieCautata = capitalizeFirstLetter(inputLocatie.value);
   const encodedLocatie = encodeURI(searchedLocation);
   let url = `https://orase.peviitor.ro/api/localitate/?nume=${encodedLocatie}`;
   console.log(url);
@@ -154,6 +156,7 @@ async function localHubInfo(id) {
 
     lineUp.appendChild(locationCard);
   }
+  initMap(locatieCautata);
 }
 
 async function deleteLocation(id) {
@@ -164,5 +167,23 @@ async function deleteLocation(id) {
       Accept: "*/*",
       Connection: "keep - alive",
     },
+  });
+}
+
+var map;
+function initMap(locatieCautata) {
+  var geocoder = new google.maps.Geocoder();
+
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 0, lng: 0 },
+    zoom: 14,
+  });
+
+  geocoder.geocode({ address: locatieCautata }, function (results, status) {
+    if (status === "OK") {
+      map.setCenter(results[0].geometry.location);
+    } else {
+      alert("Geocode was not successful for the following reason: " + status);
+    }
   });
 }
